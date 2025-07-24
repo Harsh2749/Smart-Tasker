@@ -1,0 +1,24 @@
+# ───  ENVIRONMENT VARIABLES ───
+server/.env
+client/.env
+
+# ─── NODE MODULES ───
+node_modules/
+
+# ─── BUILD OUTPUT ───
+client/dist/
+server/dist/
+
+# ─── LOG FILES ───
+*.log
+
+# ─── SYSTEM FILES ───
+.DS_Store
+Thumbs.db
+
+# ─── TEST COVERAGE ───
+coverage/
+
+# ─── IDE CONFIGS (OPTIONAL) ───
+.vscode/
+.idea/
