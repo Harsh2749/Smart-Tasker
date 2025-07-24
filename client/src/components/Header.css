@@ -1,0 +1,12 @@
+/*Brand wrapper: logo + title */
+.header-brand {
+  display: flex;
+  align-items: center;
+}
+
+/* Logo size + spacing */
+.header-logo {
+  height: 55px;   
+  width: auto;
+  margin-right: 0.5rem;
+}

@@ -1,0 +1,68 @@
+/* Ensure full height of page */
+.login-container {
+  min-height: 100vh;
+  
+}
+
+/* Form Card */
+.login-form-card {
+  width: 100%;
+  max-width: 380px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px); 
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Google button */
+.btn-google {
+  background: #fff;
+  border: 1px solid #ddd;
+  color: #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-google img {
+  height: 20px;
+  margin-right: 8px;
+}
+
+/* Gradient primary button */
+.btn-primary-gradient {
+  background: linear-gradient(90deg, #6b5bff, #ff61e0);
+  border: none;
+  color: #fff;
+  font-weight: 500;
+transition: all 0.3s ease;
+}
+.btn-primary-gradient:hover {
+  filter: brightness(1.1);
+}
+
+/* Promo column styling */
+.login-promo {
+  background: linear-gradient(135deg, #6b5bff 0%, #ff61e0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; 
+  width: 100%;
+  overflow: hidden; 
+}
+
+
+.promo-content {
+  padding: 2rem;
+}
+
+.promo-content h1 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  animation: fadeIn 1.5s ease-in;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
