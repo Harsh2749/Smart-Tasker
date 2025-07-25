@@ -34,18 +34,26 @@ export default function Dashboard() {
   }
 
   // ─── ADD ─────────────────────────────────────────────────────────
-  async function handleAdd(e) {
-    e.preventDefault();
-    if (!title.trim()) return;
-    const { data } = await API.post("/tasks", {
-      title,
-      description,
-      remindAt: remindAt || null,
-      phone,
-    });
-    setTasks([data, ...tasks]);
-    resetForm();
-  }
+async function handleAdd(e) {
+  e.preventDefault();
+  if (!title.trim()) return;
+
+  const utcTime = remindAt
+    ? new Date(remindAt).toISOString()
+    : null;
+  const { data } = await API.post("/tasks", {
+    title,
+    description,
+    remindAt: utcTime, 
+    phone,
+  });
+
+  setTasks([data, ...tasks]);
+  resetForm();
+}
+
+
+
 
   // ─── DELETE ──────────────────────────────────────────────────────
   async function handleDelete(id) {
@@ -69,17 +77,25 @@ export default function Dashboard() {
   }
 
   // ─── SAVE UPDATE ────────────────────────────────────────────────
-  async function handleUpdate(e) {
-    e.preventDefault();
-    const { data } = await API.put(`/tasks/${editingId}`, {
-      title: editTitle,
-      description: editDescr,
-      remindAt: editRemindAt || null,
-      phone: editPhone,
-    });
-    setTasks(tasks.map((t) => (t._id === editingId ? data : t)));
-    cancelEdit();
-  }
+async function handleUpdate(e) {
+  e.preventDefault();
+
+const utcTime = editRemindAt
+  ? new Date(editRemindAt).toISOString()
+  : null;
+
+  const { data } = await API.put(`/tasks/${editingId}`, {
+    title: editTitle,
+    description: editDescr,
+    remindAt: utcTime, 
+    phone: editPhone,
+  });
+
+  setTasks(tasks.map((t) => (t._id === editingId ? data : t)));
+  cancelEdit();
+}
+
+
 
   // ─── RESET ALL FORM FIELDS ─────────────────────────────────────
   function resetForm() {
