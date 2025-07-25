@@ -63,7 +63,7 @@ export async function sendEmail(task) {
   }
 }
 
-// ─── 5) SMS + WhatsApp SETUP (Twilio) ──────────────────
+// ─── SMS + WhatsApp SETUP (Twilio) ──────────────────
 let twilioClient = null;
 if (process.env.TWILIO_SID && process.env.TWILIO_TOKEN) {
   twilioClient = new Twilio(
@@ -74,7 +74,7 @@ if (process.env.TWILIO_SID && process.env.TWILIO_TOKEN) {
   console.warn(" Skipping SMS/WhatsApp setup—missing Twilio credentials");
 }
 
-// 📱 Send SMS reminder
+// Send SMS reminder
 export async function sendSMS(task) {
   console.log(" sendSMS called for task", task._id);
   console.log("    Raw phone   =", task.phone);
@@ -113,10 +113,10 @@ export async function sendWhatsApp(task) {
   console.log("    Raw phone          =", task.phone);
 
   const toNumber = normalizePhone(task.phone);
-  console.log("    Normalized WhatsApp=", toNumber);
+  console.log("Normalized WhatsApp=", toNumber);
 
   if (!twilioClient) {
-    console.warn(" Cannot send WhatsApp; Twilio not configured");
+    console.warn("Cannot send WhatsApp; Twilio not configured");
     return;
   }
   if (!process.env.TWILIO_WHATSAPP_FROM) {
