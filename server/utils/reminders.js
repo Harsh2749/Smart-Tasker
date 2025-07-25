@@ -9,7 +9,7 @@ import nodemailer from "nodemailer";
 import Twilio     from "twilio";
 
 // ─── 3) Debug env vars ─────────────────────────────────
-console.log("⚙️  Loading reminders.js with env:");
+console.log("  Loading reminders.js with env:");
 console.log("   SMTP_HOST   =", process.env.SMTP_HOST);
 console.log("   SMTP_PORT   =", process.env.SMTP_PORT);
 console.log("   SMTP_SECURE =", process.env.SMTP_SECURE);
@@ -41,13 +41,13 @@ if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
     },
   });
 } else {
-  console.warn("⚠️  Skipping email setup—missing SMTP config");
+  console.warn(" Skipping email setup—missing SMTP config");
 }
 
-// 📧 Send email reminder
+//  Send email reminder
 export async function sendEmail(task) {
   if (!transporter) {
-    console.warn("⚠️  Cannot send email; transporter not configured");
+    console.warn(" Cannot send email; transporter not configured");
     return;
   }
   try {
@@ -57,9 +57,9 @@ export async function sendEmail(task) {
       subject: `Reminder: ${task.title}`,
       text: task.description || "You asked me to remind you about this task.",
     });
-    console.log(`📧 Email sent for task ${task._id}`);
+    console.log(` Email sent for task ${task._id}`);
   } catch (err) {
-    console.error("❌ Email send error:", err);
+    console.error("Email send error:", err);
   }
 }
 
@@ -71,27 +71,27 @@ if (process.env.TWILIO_SID && process.env.TWILIO_TOKEN) {
     process.env.TWILIO_TOKEN
   );
 } else {
-  console.warn("⚠️  Skipping SMS/WhatsApp setup—missing Twilio credentials");
+  console.warn(" Skipping SMS/WhatsApp setup—missing Twilio credentials");
 }
 
 // 📱 Send SMS reminder
 export async function sendSMS(task) {
-  console.log("ℹ️  sendSMS called for task", task._id);
+  console.log(" sendSMS called for task", task._id);
   console.log("    Raw phone   =", task.phone);
 
   const toNumber = normalizePhone(task.phone);
   console.log("    Normalized  =", toNumber);
 
   if (!twilioClient) {
-    console.warn("⚠️  Cannot send SMS; Twilio client not configured");
+    console.warn("Cannot send SMS; Twilio client not configured");
     return;
   }
   if (!process.env.TWILIO_FROM) {
-    console.warn("⚠️  Cannot send SMS; TWILIO_FROM not set");
+    console.warn("Cannot send SMS; TWILIO_FROM not set");
     return;
   }
   if (!task.phone || task.phone.trim() === "") {
-    console.warn(`⚠️  Cannot send SMS for task ${task._id}; no phone number`);
+    console.warn(`Cannot send SMS for task ${task._id}; no phone number`);
     return;
   }
 
@@ -99,32 +99,32 @@ export async function sendSMS(task) {
     const msg = await twilioClient.messages.create({
       from: process.env.TWILIO_FROM,
       to: toNumber,
-      body: `🔔 Reminder: ${task.title}\n${task.description || ""}`,
+      body: `Reminder: ${task.title}\n${task.description || ""}`,
     });
-    console.log("📱 SMS sent, SID:", msg.sid);
+    console.log(" SMS sent, SID:", msg.sid);
   } catch (err) {
-    console.error("❌ SMS send error:", err);
+    console.error("SMS send error:", err);
   }
 }
 
-// 📲 Send WhatsApp reminder
+// Send WhatsApp reminder
 export async function sendWhatsApp(task) {
-  console.log("ℹ️  sendWhatsApp called for task", task._id);
+  console.log(" sendWhatsApp called for task", task._id);
   console.log("    Raw phone          =", task.phone);
 
   const toNumber = normalizePhone(task.phone);
   console.log("    Normalized WhatsApp=", toNumber);
 
   if (!twilioClient) {
-    console.warn("⚠️  Cannot send WhatsApp; Twilio not configured");
+    console.warn(" Cannot send WhatsApp; Twilio not configured");
     return;
   }
   if (!process.env.TWILIO_WHATSAPP_FROM) {
-    console.warn("⚠️  TWILIO_WHATSAPP_FROM not set in .env");
+    console.warn(" TWILIO_WHATSAPP_FROM not set in .env");
     return;
   }
   if (!task.phone || task.phone.trim() === "") {
-    console.warn(`⚠️  Cannot send WhatsApp for task ${task._id}; no phone number`);
+    console.warn(` Cannot send WhatsApp for task ${task._id}; no phone number`);
     return;
   }
 

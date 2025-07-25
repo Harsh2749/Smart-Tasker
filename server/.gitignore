@@ -1,24 +1,27 @@
-# ───  ENVIRONMENT VARIABLES ───
-server/.env
-client/.env
-
-# ─── NODE MODULES ───
-node_modules/
-
-# ─── BUILD OUTPUT ───
-client/dist/
-server/dist/
-
-# ─── LOG FILES ───
+# Logs
+logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# ─── SYSTEM FILES ───
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
 .DS_Store
-Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
-# ─── TEST COVERAGE ───
-coverage/
-
-# ─── IDE CONFIGS (OPTIONAL) ───
-.vscode/
-.idea/
+# Don't commit environment files
+.env
