@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api";
 import "./Login.css";
-import axios from "axios";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -14,8 +13,8 @@ export default function Login() {
     e.preventDefault();
     setError("");
     try {
-      const { data } = await axios.post(
-  "https://smarttasker-backend.onrender.com/api/auth/login",
+const { data } = await API.post(
+  "/auth/login",             
   { email, password }
 );
       localStorage.setItem("token", data.token);
