@@ -13,7 +13,10 @@ export default function Login() {
     e.preventDefault();
     setError("");
     try {
-      const { data } = await API.post("/auth/login", { email, password });
+      const { data } = await axios.post(
+  "https://smarttasker-backend.onrender.com/api/auth/login",
+  { email, password }
+);
       localStorage.setItem("token", data.token);
       navigate("/dashboard");
     } catch (err) {
