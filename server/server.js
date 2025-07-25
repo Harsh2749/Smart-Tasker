@@ -50,7 +50,7 @@ mongoose
     console.log(`Connected to MongoDB (${NODE_ENV} mode)`);
 
     app.listen(PORT, () => {
-      console.log(`Server running at http://localhost:${PORT}`);
+        console.log("Server running at https://smarttasker-backend.onrender.com");
     });
 
     // Start Cron Job After DB Connect
