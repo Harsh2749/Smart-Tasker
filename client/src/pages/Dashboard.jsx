@@ -3,6 +3,7 @@ import API from "../api";
 import Header from "../components/Header";
 import TaskCard from "../components/TaskCard";
 import "./Dashboard.css";
+import axios from "axios";
 
 export default function Dashboard() {
   const [tasks, setTasks] = useState([]);
@@ -24,14 +25,17 @@ export default function Dashboard() {
     fetchTasks();
   }, []);
 
-  async function fetchTasks() {
-    try {
-      const res = await API.get("/tasks");
-      setTasks(res.data);
-    } catch {
-      // handle redirect if unauthorized
-    }
+async function fetchTasks() {
+  try {
+    const res = await axios.get("https://smarttasker-backend.onrender.com/api/tasks", {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+    });
+    setTasks(res.data); 
+  } catch (err) {
+    console.error("Failed to fetch tasks:", err);
+    // handle redirect if unauthorized
   }
+}
 
   // ─── ADD ─────────────────────────────────────────────────────────
 async function handleAdd(e) {
@@ -41,7 +45,7 @@ async function handleAdd(e) {
   const utcTime = remindAt
     ? new Date(remindAt).toISOString()
     : null;
-  const { data } = await API.post("/tasks", {
+  const { data } = await axios.post("https://smarttasker-backend.onrender.com/api/tasks", {
     title,
     description,
     remindAt: utcTime, 
@@ -57,7 +61,10 @@ async function handleAdd(e) {
 
   // ─── DELETE ──────────────────────────────────────────────────────
   async function handleDelete(id) {
-    await API.delete(`/tasks/${id}`);
+  await axios.delete(`https://smarttasker-backend.onrender.com/api/tasks/${id}`, {
+  headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+});
+
     setTasks(tasks.filter((t) => t._id !== id));
   }
 
@@ -84,7 +91,7 @@ const utcTime = editRemindAt
   ? new Date(editRemindAt).toISOString()
   : null;
 
-  const { data } = await API.put(`/tasks/${editingId}`, {
+  const { data } = await axios.put(`https://smarttasker-backend.onrender.com/api/tasks/${editingId}`, {
     title: editTitle,
     description: editDescr,
     remindAt: utcTime, 
