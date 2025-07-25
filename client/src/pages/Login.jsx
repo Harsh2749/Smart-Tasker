@@ -42,7 +42,7 @@ export default function Login() {
               type="button"
               className="btn btn-google mb-3 w-100"
               onClick={() =>
-                (window.location.href = "http://localhost:5000/api/auth/google")
+                (window.location.href = "https://smarttasker-backend.onrender.com/api/auth/google")
               }
             >
               <img
