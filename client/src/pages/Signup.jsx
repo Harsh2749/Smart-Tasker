@@ -14,7 +14,7 @@ export default function Signup() {
     console.log("Signup submitted", { email, password }); // debug
 
     try {
-      await API.post("/auth/signup", { email, password });
+      await API.post("https://smarttasker-backend.onrender.com/api/auth/signup", { email, password });
       alert("Account created successfully. Please log in.");
       navigate("/login", { replace: true });
     } catch (err) {
