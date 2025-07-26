@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate }           from "react-router-dom";
-import API                       from "../api";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import API from "../api";
 
 export default function Signup() {
   const [email, setEmail]       = useState("");
@@ -15,7 +14,7 @@ export default function Signup() {
     console.log("Signup submitted", { email, password }); // debug
 
     try {
-      await axios.post("https://smarttasker-backend.onrender.com/api/auth/signup", { email, password });
+     await API.post("/auth/signup", { email, password });
       alert("Account created successfully. Please log in.");
       navigate("/login", { replace: true });
     } catch (err) {
