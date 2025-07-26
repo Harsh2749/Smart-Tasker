@@ -66,3 +66,20 @@ transition: all 0.3s ease;
   0% { opacity: 0; transform: translateY(10px); }
   100% { opacity: 1; transform: translateY(0); }
 }
+
+/*  Mobile responsive tweaks */
+@media (max-width: 767px) {
+  .login-promo {
+    display: none !important;
+  }
+
+  .login-container .col-md-6 {
+    width: 100% !important;
+  }
+
+  .login-form-card {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
