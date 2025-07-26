@@ -13,7 +13,7 @@ export default function ResetPassword() {
     e.preventDefault();
     setMsg(""); setError("");
     try {
-      const res = await API.post(`https://smarttasker-backend.onrender.com/api/auth/reset-password/${token}`, { password });
+      const res = await API.post(`/auth/reset-password/${token}`, { password });
       setMsg(res.data.message);
       // redirect to login after a brief pause
       setTimeout(() => navigate("/login"), 2000);
