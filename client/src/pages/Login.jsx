@@ -17,6 +17,7 @@ const { data } = await API.post(
   "/auth/login",             
   { email, password }
 );
+      console.log("TOKEN FROM LOGIN:", data.token);
       localStorage.setItem("token", data.token);
       navigate("/dashboard");
     } catch (err) {
